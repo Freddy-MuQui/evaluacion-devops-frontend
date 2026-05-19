@@ -34,3 +34,22 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
+
+🚀 Despliegue Manual con Docker
+Para levantar este servicio de forma manual, se utilizan los siguientes comandos:
+# 1. Construir la imagen
+sudo docker build -t frontend .
+
+# 2. Levantar el contenedor en el puerto 80
+sudo docker run -d -p 80:80 --name contenedor_frontend frontend
+
+🤖 CI/CD (Despliegue Continuo con GitHub Actions)
+Este repositorio cuenta con un pipeline de automatización configurado en la rama deploy. Al realizar un git push hacia esta rama, GitHub Actions se encarga de:
+
+Hacer login en Docker Hub.
+
+Construir la imagen y subirla al registro público.
+
+Conectarse por SSH a la instancia EC2 pública.
+
+Descargar la imagen actualizada y reiniciar el contenedor automáticamente.
